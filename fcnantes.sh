@@ -15,4 +15,5 @@ do
       echo $TITLE |  tr -d '[\200-\377]' | say -v Thomas 
     fi
   done
+  sleep 30
 done
