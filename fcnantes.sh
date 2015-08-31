@@ -9,10 +9,14 @@ do
   for NUM in $(seq $MONITOR_FROM 1 $SCAN_UNTIL); do
    TITLE=`curl -s http://fcnantes.com/articles/article2809.php\?num\=$NUM | grep "</title>"`
    TITLE=${TITLE%<*}
+   TITLE=${TITLE#FC\ Nantes\ :}
    echo "$NUM\t$TITLE"
    if [ ! -z "$TITLE" ]
     then
       echo $TITLE |  tr -d '[\200-\377]' | say -v Thomas 
+      
+      MONITOR_FROM=$(($NUM+1))
+      SCAN_UNTIL=$((MONITOR_FROM+HOW_MANY))
     fi
   done
   sleep 30
